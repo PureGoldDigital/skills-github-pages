@@ -1,85 +1,14 @@
-// Sample blog data (already provided, included for context)
+// Updated blog data with only the actual published post
 const blogPosts = [
     {
         id: 1,
-        title: "5 Essential Brand Elements That Convert Visitors Into Customers",
-        excerpt: "Discover the key brand elements that create emotional connections and drive conversions. Learn how to implement these strategies for maximum impact.",
+        title: "The Complete Guide to Building a Brand That Converts in 2025",
+        excerpt: "Discover the essential strategies and proven frameworks that transform ordinary brands into conversion powerhouses. Learn how to create emotional connections, build trust, and drive meaningful business growth through strategic brand development.",
         category: "Brand Strategy",
-        date: "May 25, 2025",
-        icon: "📝",
-        popularity: 95
-    },
-    {
-        id: 2,
-        title: "2025 Web Design Trends That Will Transform Your Digital Presence",
-        excerpt: "Explore the cutting-edge design trends that will dominate 2025. From micro-interactions to bold typography, discover what's next.",
-        category: "Design Trends",
-        date: "May 22, 2025",
-        icon: "🎨",
-        popularity: 87
-    },
-    {
-        id: 3,
-        title: "The ROI of Professional Branding: Real Numbers From Our Clients",
-        excerpt: "See the actual impact of strategic branding on business growth. We share real case studies and metrics that demonstrate value.",
-        category: "Digital Marketing",
-        date: "May 20, 2025",
-        icon: "🚀",
-        popularity: 92
-    },
-    {
-        id: 4,
-        title: "Psychology of Color in Digital Branding: What Works and Why",
-        excerpt: "Understand how color psychology influences purchasing decisions and brand perception in the digital landscape.",
-        category: "Brand Strategy",
-        date: "May 18, 2025",
-        icon: "🎭",
-        popularity: 78
-    },
-    {
-        id: 5,
-        title: "Mobile-First Design: Creating Seamless User Experiences",
-        excerpt: "Learn the principles of mobile-first design and how to create interfaces that work beautifully across all devices.",
-        category: "Design Trends",
-        date: "May 15, 2025",
-        icon: "📱",
-        popularity: 83
-    },
-    {
-        id: 6,
-        title: "Content Marketing Strategies That Drive Real Business Growth",
-        excerpt: "Discover proven content marketing tactics that generate leads, build authority, and create lasting customer relationships.",
-        category: "Digital Marketing",
-        date: "May 12, 2025",
-        icon: "📊",
-        popularity: 89
-    },
-    {
-        id: 7,
-        title: "Building Brand Trust in the Digital Age",
-        excerpt: "Explore strategies for establishing credibility and trust with your audience in an increasingly skeptical digital world.",
-        category: "Brand Strategy",
-        date: "May 10, 2025",
-        icon: "🛡️",
-        popularity: 91
-    },
-    {
-        id: 8,
-        title: "The Future of E-commerce Design: Trends to Watch",
-        excerpt: "Stay ahead of the curve with emerging e-commerce design trends that boost conversions and enhance user experience.",
-        category: "Design Trends",
-        date: "May 8, 2025",
-        icon: "🛒",
-        popularity: 76
-    },
-    {
-        id: 9,
-        title: "Social Media Branding: Consistency Across Platforms",
-        excerpt: "Learn how to maintain brand consistency across all social media platforms while adapting to each platform's unique requirements.",
-        category: "Digital Marketing",
-        date: "May 5, 2025",
-        icon: "📲",
-        popularity: 85
+        date: "May 28, 2025",
+        icon: "🎯",
+        popularity: 100,
+        url: "https://puregolddigital.github.io/www.puregolddigitalagency.com/blogs/The-Complete-Guide-to-Building-a-Brand-That-Converts-in-2025.html"
     }
 ];
 
@@ -88,9 +17,18 @@ const postsPerPage = 6;
 let filteredPosts = [...blogPosts];
 let selectedCategory = "All Categories";
 
-// Render blog posts
+// Render blog posts - hide section if only one post (which is featured)
 function renderBlogPosts() {
     const blogGrid = document.getElementById('blogGrid');
+    const blogGridSection = document.querySelector('.blog-grid-section');
+    
+    // If we only have one post, hide the latest articles section since it's already featured
+    if (blogPosts.length === 1) {
+        blogGridSection.style.display = 'none';
+        return;
+    }
+    
+    blogGridSection.style.display = 'block';
     const startIndex = (currentPage - 1) * postsPerPage;
     const endIndex = startIndex + postsPerPage;
     const postsToShow = filteredPosts.slice(startIndex, endIndex);
@@ -105,7 +43,7 @@ function renderBlogPosts() {
                 </div>
                 <h3>${post.title}</h3>
                 <p>${post.excerpt}</p>
-                <a href="#" class="read-more">Read More</a>
+                <a href="${post.url}" class="read-more">Read More</a>
             </div>
         </div>
     `).join('');
@@ -113,10 +51,18 @@ function renderBlogPosts() {
     updatePagination();
 }
 
-// Update pagination
+// Update pagination - simplified for single post
 function updatePagination() {
     const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
     const pagination = document.getElementById('pagination');
+    
+    // Hide pagination if only one page
+    if (totalPages <= 1) {
+        pagination.style.display = 'none';
+        return;
+    }
+    
+    pagination.style.display = 'flex';
     
     let paginationHTML = `
         <button class="pagination-btn" onclick="changePage(-1)" id="prevBtn" ${currentPage === 1 ? 'disabled' : ''}>← Previous</button>
@@ -154,7 +100,7 @@ function goToPage(page) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Search functionality
+// Search functionality - handle single post case
 document.getElementById('searchInput').addEventListener('input', function(e) {
     const searchTerm = e.target.value.toLowerCase();
     filteredPosts = blogPosts.filter(post => 
@@ -167,6 +113,18 @@ document.getElementById('searchInput').addEventListener('input', function(e) {
     }
     currentPage = 1;
     renderBlogPosts();
+    
+    // Show/hide search results message
+    const blogGridSection = document.querySelector('.blog-grid-section');
+    const sectionHeader = blogGridSection.querySelector('.section-header h2');
+    
+    if (filteredPosts.length === 0) {
+        blogGridSection.style.display = 'block';
+        sectionHeader.textContent = 'No articles found';
+        document.getElementById('blogGrid').innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No articles match your search criteria.</p>';
+    } else if (blogPosts.length > 1) {
+        sectionHeader.textContent = 'Latest Articles';
+    }
 });
 
 // Sort functionality
@@ -186,7 +144,7 @@ function sortPosts(sortBy) {
     renderBlogPosts();
 }
 
-// Filter functionality
+// Filter functionality - simplified for single category
 function toggleFilter() {
     const filterBtn = document.querySelector('.filter-btn');
     const existingDropdown = document.querySelector('.filter-options');
@@ -238,9 +196,21 @@ function toggleFilter() {
     });
 }
 
+// Update the featured post link as well
+function updateFeaturedPost() {
+    const featuredPost = document.querySelector('.featured-post');
+    if (featuredPost) {
+        const readMoreLink = featuredPost.querySelector('.read-more');
+        if (readMoreLink) {
+            readMoreLink.href = blogPosts[0].url;
+        }
+    }
+}
+
 // Initialize blog posts on page load
 document.addEventListener('DOMContentLoaded', () => {
     renderBlogPosts();
+    updateFeaturedPost();
 });
 
 // Newsletter form submission
