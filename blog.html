@@ -1,0 +1,120 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Pure Gold Digital Branding | Latest Insights & Trends</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="css/blog.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">Pure Gold</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="service.html">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#contact" class="cta-button">Get Started</a>
+        </nav>
+    </header>
+
+    <!-- Blog Hero Section -->
+    <section class="blog-hero">
+        <div class="blog-hero-content">
+            <h1>Golden Insights & <span class="highlight">Industry Trends</span></h1>
+            <p>Discover expert insights on digital branding, design trends, and marketing strategies that transform businesses into digital gold.</p>
+        </div>
+    </section>
+
+    <!-- Search and Filter -->
+    <section class="search-filter">
+        <div class="container">
+            <div class="search-filter-content">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" placeholder="Search articles..." id="searchInput">
+                </div>
+                <div class="filter-dropdown">
+                    <div class="filter-btn" onclick="toggleFilter()">
+                        <span>All Categories</span>
+                        <span>▼</span>
+                    </div>
+                </div>
+                <select class="sort-dropdown" onchange="sortPosts(this.value)">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="popular">Most Popular</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Post -->
+    <section class="featured-section">
+        <div class="container">
+            <div class="featured-post">
+                <div class="featured-image">
+                    🎯
+                </div>
+                <div class="featured-content">
+                    <div class="featured-meta">
+                        <span class="featured-badge">Featured</span>
+                        <span class="featured-date">May 28, 2025</span>
+                    </div>
+                    <h2>The Complete Guide to Building a Brand That Converts in 2025</h2>
+                    <p>Discover the essential strategies and proven frameworks that transform ordinary brands into conversion powerhouses. Learn how to create emotional connections, build trust, and drive meaningful business growth through strategic brand development.</p>
+                    <a href="#" class="read-more">Read Full Article</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Grid -->
+    <section class="blog-grid-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Latest Articles</h2>
+            </div>
+            
+            <div class="blog-grid" id="blogGrid">
+                <!-- Blog cards will be populated by JavaScript -->
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination" id="pagination">
+                <button class="pagination-btn" onclick="changePage(-1)" id="prevBtn">← Previous</button>
+                <a href="#" class="pagination-btn active">1</a>
+                <a href="#" class="pagination-btn">2</a>
+                <a href="#" class="pagination-btn">3</a>
+                <a href="#" class="pagination-btn">4</a>
+                <a href="#" class="pagination-btn">5</a>
+                <button class="pagination-btn" onclick="changePage(1)" id="nextBtn">Next →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter">
+        <div class="newsletter-content">
+            <h3>Never Miss Golden Insights</h3>
+            <p>Subscribe to our newsletter and get the latest trends, tips, and strategies delivered straight to your inbox.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Pure Gold Digital Branding. All rights reserved. | Transforming brands into digital gold.</p>
+        </div>
+    </footer>
+<script src="scripts/blog.js"></script>
+</body>
