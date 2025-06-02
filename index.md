@@ -787,7 +787,9 @@
 
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(135deg, #FFA500, #FF6B35);
-        }    </style>  
+        }   
+        </style>  
+        </head>
       <header>
         <nav>
             <div class="logo">Pure Gold </div>
@@ -1137,3 +1139,4 @@
             observer.observe(el);
         });
     </script>
+</html>
