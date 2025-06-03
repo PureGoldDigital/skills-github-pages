@@ -195,7 +195,11 @@
                             <label for="message">Project Details</label>
                             <textarea id="message" name="message" rows="5" required></textarea>
                         </div>
-                        
+
+                        <!-- Optional: Redirect to a thank-you page -->
+        <input type="hidden" name="_next" value="/Thank-You.html" />
+        <!-- Optional: Customize email subject -->
+        <input type="hidden" name="_subject" value="New Contact Form Submission" />                        
                         <button type="submit" class="cta-button" style="width: 100%;">Send Message</button>
                     </form>
                 </div>
