@@ -472,6 +472,28 @@
         }
 
       /* Contact Section */
+.section-header h2 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #2D5016;
+        }
+
+        .section-header p {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
 .container {
             max-width: 1200px;
             margin: 0 auto;
