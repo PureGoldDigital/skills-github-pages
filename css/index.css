@@ -320,7 +320,7 @@
 
         .stats {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
             margin-top: 2rem;
         }
@@ -446,7 +446,7 @@
         /* Blog Section */
         .blog {
             padding: 6rem 2rem;
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            background-color: #1a1a1a;
             position: relative;
         }
 
@@ -467,8 +467,12 @@
         }
 
         .blog .section-header h2 {
-            color: #2D5016;
+            color: #fff;
         }
+
+.blog p {
+  color: white;
+}
 
         .blog-grid {
             display: grid;
