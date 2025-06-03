@@ -8,7 +8,7 @@ const blogPosts = [
         date: "May 28, 2025",
         icon: "🎯",
         popularity: 100,
-        url: "https://puregolddigital.github.io/www.puregolddigitalagency.com/blogs/The-Complete-Guide-to-Building-a-Brand-That-Converts-in-2025.html"
+        url: "https://puregolddigital.github.io/www.puregolddigitalagency.com/blogs/Your-Brand-Style-Guide:-The-Unsung-Hero-of-Consistent-Marketing.html"
     }
 ];
 
