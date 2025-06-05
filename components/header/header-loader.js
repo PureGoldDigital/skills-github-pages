@@ -61,6 +61,20 @@ function initializeHamburgerMenu() {
     return true;
 }
 
+// Ensure logo is clickable
+const logo = document.querySelector('.logo');
+if (logo) {
+    logo.style.pointerEvents = 'auto';
+    logo.style.cursor = 'pointer';
+    
+    // Force click handler if needed
+    logo.addEventListener('click', function(e) {
+        if (this.href) {
+            window.location.href = this.href;
+        }
+    });
+}
+
 class GlobalHeaderLoader {
     static getBasePath() {
         // Get current path depth
