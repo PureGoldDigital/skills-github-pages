@@ -1,3 +1,66 @@
+// Hamburger Menu Functionality
+function initializeHamburgerMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileOverlay = document.getElementById('mobile-overlay');
+    const body = document.body;
+
+    // Check if elements exist before proceeding
+    if (!hamburger || !mobileMenu || !mobileOverlay) {
+        console.warn('Hamburger menu elements not found, retrying...');
+        return false;
+    }
+
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        mobileOverlay.classList.toggle('active');
+        
+        // Prevent body scroll when menu is open
+        if (mobileMenu.classList.contains('active')) {
+            body.style.overflow = 'hidden';
+        } else {
+            body.style.overflow = '';
+        }
+    }
+
+    // Close mobile menu
+    function closeMobileMenu() {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        mobileOverlay.classList.remove('active');
+        body.style.overflow = '';
+    }
+
+    // Event listeners
+    hamburger.addEventListener('click', toggleMobileMenu);
+    hamburger.addEventListener('touchstart', toggleMobileMenu, { passive: true });
+    mobileOverlay.addEventListener('click', closeMobileMenu);
+
+    // Close menu when clicking on a link
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Close menu on window resize if open
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && mobileMenu.classList.contains('active')) {
+            closeMobileMenu();
+        }
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+            closeMobileMenu();
+        }
+    });
+
+    return true;
+}
+
 class GlobalHeaderLoader {
     static getBasePath() {
         // Get current path depth
@@ -35,10 +98,15 @@ class GlobalHeaderLoader {
             html = this.fixNavigationLinks(html, basePath);
             document.body.insertAdjacentHTML('afterbegin', html);
 
-            // Load and execute JS
-            const jsResponse = await fetch(`${basePath}components/header/header.js`);
-            const js = await jsResponse.text();
-            eval(js);
+            // Initialize hamburger menu after HTML is loaded
+            // Use a small delay to ensure DOM is fully updated
+            setTimeout(() => {
+                const success = initializeHamburgerMenu();
+                if (!success) {
+                    // Retry after another delay if first attempt failed
+                    setTimeout(initializeHamburgerMenu, 100);
+                }
+            }, 10);
 
             console.log('✅ Global header loaded successfully from:', basePath);
         } catch (error) {
@@ -83,6 +151,9 @@ class GlobalHeaderLoader {
         `;
         document.body.insertAdjacentHTML('afterbegin', fallbackHeader);
         document.body.style.paddingTop = '80px'; // Account for fixed header
+        
+        // Try to initialize hamburger menu for fallback too
+        setTimeout(initializeHamburgerMenu, 50);
     }
 }
 
