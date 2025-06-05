@@ -218,7 +218,7 @@
         @media (max-width: 768px) {
             /* Show hamburger menu */
             .hamburger {
-                display: flex;
+                display: flex !important;
                 order: 1;
             }
             
@@ -239,12 +239,7 @@
             
             /* Hide desktop navigation */
             .nav-links {
-                display: none;
-            }
-            
-            /* Show mobile menu when active */
-            .mobile-menu {
-                display: flex;
+                display: none !important;
             }
             
             /* Adjust nav padding for mobile */
@@ -276,22 +271,6 @@
             .hamburger span {
                 width: 20px;
             }
-        }
-
-        /* Demo content */
-        .demo-content {
-            margin-top: 100px;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .demo-section {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
 
         h1 {
