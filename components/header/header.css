@@ -4,6 +4,7 @@
     flex-direction: column;
     cursor: pointer;
     padding: 0.5rem;
+    margin-left: 0.5rem;
     z-index: 1001;
 }
 
