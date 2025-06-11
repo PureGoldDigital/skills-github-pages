@@ -2,53 +2,56 @@
 .hamburger {
     display: none;
     width: 25px;
-    height: 25px; /* Changed to square container */
+    height: 25px; /* Square container */
     cursor: pointer;
     padding: 0.75rem;
     margin-left: 0.5rem;
     position: relative;
     z-index: 1001;
     transition: all 0.3s ease;
-    background: transparent; /* Remove background from container */
+    background: transparent;
 }
 
-/* Middle line */
+/* Top line */
 .hamburger::before {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 25px;
-    background: linear-gradient(135deg, #FFD700, #FFA500);
-    transform: translate(-50%, -50%); /* Center the line */
-    transition: all 0.3s ease;
-    border-radius: 2px;
-}
-
-/* Top and bottom lines */
-.hamburger::after {
-    content: '';
-    position: absolute;
+    top: calc(50% - 8px); /* Position above the middle */
     left: 50%;
     width: 25px;
     height: 3px;
     background: linear-gradient(135deg, #FFD700, #FFA500);
+    transform: translateX(-50%); /* Center horizontally */
     transition: all 0.3s ease;
     border-radius: 2px;
+}
+
+/* Bottom line */
+.hamburger::after {
+    content: '';
+    position: absolute;
+    top: calc(50% + 8px); /* Position below the middle */
+    left: 50%;
+    width: 25px;
+    height: 3px;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
     transform: translateX(-50%);
-    box-shadow: 0 -8px 0 0 #FFD700, 0 8px 0 0 #FFD700; /* Creates top and bottom lines */
+    transition: all 0.3s ease;
+    border-radius: 2px;
+    box-shadow: 0 -16px 0 0 #FFD700; /* Creates the middle line */
 }
 
 /* Hamburger animation when active - forms X */
 .hamburger.active::before {
+    top: 50%;
     transform: translate(-50%, -50%) rotate(45deg); /* Diagonal line 1 */
 }
 
 .hamburger.active::after {
-    transform: translateX(-50%) rotate(-45deg); /* Diagonal line 2 */
-    box-shadow: none; /* Hide the extra lines */
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg); /* Diagonal line 2 */
+    box-shadow: none; /* Hide the middle line */
 }
-
 /* Mobile menu overlay */
 .nav-links.mobile-menu {
     position: fixed;
