@@ -19,7 +19,6 @@
     top: 50%;
     left: 50%;
     width: 25px;
-    height: 3px;
     background: linear-gradient(135deg, #FFD700, #FFA500);
     transform: translate(-50%, -50%); /* Center the line */
     transition: all 0.3s ease;
