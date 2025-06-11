@@ -136,7 +136,7 @@ class GlobalHeaderLoader {
             'services.html': `${basePath}services.html`,
             'about.html': `${basePath}about.html`,
             'blog.html': `${basePath}blog.html`,
-            '#contact': '#contact' // Hash links stay the same
+            'contact.html': '${basePath}contact.html' // Hash links stay the same
         };
 
         let fixedHtml = html;
@@ -158,7 +158,7 @@ class GlobalHeaderLoader {
                         <a href="${basePath}index.html" style="margin: 0 1rem; text-decoration: none; color: #333;">Home</a>
                         <a href="${basePath}about.html" style="margin: 0 1rem; text-decoration: none; color: #333;">About</a>
                         <a href="${basePath}blog.html" style="margin: 0 1rem; text-decoration: none; color: #333;">Blog</a>
-                        <a href="#contact" style="margin: 0 1rem; text-decoration: none; color: #333;">Contact</a>
+                        <a href="${basePath}contact.html" style="margin: 0 1rem; text-decoration: none; color: #333;">Contact</a>
                     </div>
                 </nav>
             </header>
