@@ -75,21 +75,24 @@ if (logo) {
 
 class GlobalHeaderLoader {
     static getBasePath() {
-        // Get current path depth
-        const pathSegments = window.location.pathname.split('/').filter(segment => segment.length > 0);
-        const htmlFile = pathSegments[pathSegments.length - 1];
-        
-        // Remove the HTML file from segments if present
-        if (htmlFile && htmlFile.includes('.html')) {
-            pathSegments.pop();
-        }
-        
-        // Calculate how many levels deep we are
-        const depth = pathSegments.length;
-        
-        // Create relative path back to root
-        return depth > 0 ? '../'.repeat(depth) : './';
+    // Get the current pathname
+    const pathname = window.location.pathname;
+    
+    // Split path and filter out empty segments
+    let pathSegments = pathname.split('/').filter(segment => segment.length > 0);
+    
+    // Remove HTML file if present (files like index.html, contact.html, etc.)
+    const lastSegment = pathSegments[pathSegments.length - 1];
+    if (lastSegment && lastSegment.includes('.html')) {
+        pathSegments.pop();
     }
+    
+    // Calculate depth - if we're in root after removing HTML file, depth should be 0
+    const depth = pathSegments.length;
+    
+    // Return appropriate path
+    return depth > 0 ? '../'.repeat(depth) : './';
+}
 
     static async load() {
         const basePath = this.getBasePath();
