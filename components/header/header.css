@@ -20,32 +20,31 @@
     width: 25px;
     height: 3px;
     background: linear-gradient(135deg, #FFD700, #FFA500);
-    left: 0.75rem; /* Align with padding */
+    left: 0.75rem;
     transition: all 0.3s ease;
     border-radius: 2px;
 }
 
 .hamburger::before {
-    top: 0.25rem; /* Position above the middle line */
+    top: 0.4rem; /* Space above middle line */
 }
 
 .hamburger::after {
-    bottom: 0.25rem; /* Position below the middle line */
+    bottom: 0.4rem; /* Space below middle line */
 }
 
 /* Hamburger animation when active */
 .hamburger.active {
-    background: transparent; /* Hide the middle line */
+    background: transparent; /* Hide middle line to form X */
 }
 
 .hamburger.active::before {
-    transform: rotate(-45deg) translate(-7px, 7px);
+    transform: rotate(45deg) translate(3px, 3px); /* Top-right of X */
 }
 
 .hamburger.active::after {
-    transform: rotate(45deg) translate(-7px, -7px);
+    transform: rotate(-45deg) translate(3px, -3px); /* Bottom-left of X */
 }
-
 
 /* Mobile menu overlay */
 .nav-links.mobile-menu {
@@ -99,7 +98,7 @@
 @media (max-width: 768px) {
     /* Show hamburger menu */
     .hamburger {
-        display: flex;
+        display: block;
         order: 1;
     }
     
