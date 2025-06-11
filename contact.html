@@ -27,17 +27,14 @@
             
             <div class="contact-content">
                 <div class="contact-form">
-                    <div class="success-message" id="successMessage">
-                        Thank you for your message! We'll get back to you within 24 hours.
-                    </div>
-                    <form id="contactForm" action="https://formspree.io/f/mwpbkzzl" method="POST">
+                    <form action="https://formspree.io/f/mwpbkzzl" method="POST">
                         <div class="form-group">
-                            <label for="name">Full Name *</label>
+                            <label for="name">Full Name</label>
                             <input type="text" id="name" name="name" required>
                         </div>
                         
                         <div class="form-group">
-                            <label for="email">Email Address *</label>
+                            <label for="email">Email Address</label>
                             <input type="email" id="email" name="email" required>
                         </div>
                         
@@ -47,21 +44,10 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="budget">Project Budget</label>
-                            <select id="budget" name="budget" style="width: 100%; padding: 0.75rem; border: 2px solid #e9ecef; border-radius: 10px; font-size: 1rem; font-family: 'Montserrat', sans-serif;">
-                                <option value="">Select Budget Range</option>
-                                <option value="Under $5,000">Under $5,000</option>
-                                <option value="$5,000 - $10,000">$5,000 - $10,000</option>
-                                <option value="$10,000 - $25,000">$10,000 - $25,000</option>
-                                <option value="$25,000+">$25,000+</option>
-                            </select>
+                            <label for="message">Project Details</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Project Details *</label>
-                            <textarea id="message" name="message" rows="5" placeholder="Tell us about your project, goals, and timeline..." required></textarea>
-                        </div>
-                        
+
                         <input type="hidden" name="_next" value="https://puregolddigital.github.io/www.puregolddigitalagency.com/Thank-You.html" />
                         <input type="hidden" name="_subject" value="New Contact Form Submission" />                        
                         <button type="submit" class="cta-button" style="width: 100%;">Send Message</button>
