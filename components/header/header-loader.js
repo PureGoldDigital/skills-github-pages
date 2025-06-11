@@ -1,4 +1,3 @@
-// Hamburger Menu Functionality
 function initializeHamburgerMenu() {
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -6,8 +5,16 @@ function initializeHamburgerMenu() {
     const body = document.body;
 
     // Check if elements exist before proceeding
-    if (!hamburger || !mobileMenu || !mobileOverlay) {
-        console.warn('Hamburger menu elements not found, retrying...');
+    if (!hamburger) {
+        console.warn('Hamburger element (#hamburger) not found');
+        return false;
+    }
+    if (!mobileMenu) {
+        console.warn('Mobile menu element (#mobile-menu) not found');
+        return false;
+    }
+    if (!mobileOverlay) {
+        console.warn('Mobile overlay element (#mobile-overlay) not found');
         return false;
     }
 
@@ -16,8 +23,8 @@ function initializeHamburgerMenu() {
 
     // Toggle mobile menu
     function toggleMobileMenu(e) {
-        e.preventDefault(); // Prevent default behavior
-        e.stopPropagation(); // Stop event bubbling
+        e.preventDefault();
+        e.stopPropagation();
 
         if (isToggling) {
             console.log('Toggle skipped: Menu is already toggling');
@@ -27,7 +34,6 @@ function initializeHamburgerMenu() {
         isToggling = true;
         console.log('Toggling menu. Current state (active):', hamburger.classList.contains('active'));
 
-        // Toggle classes based on current state
         const isActive = hamburger.classList.contains('active');
         if (isActive) {
             hamburger.classList.remove('active');
@@ -43,7 +49,6 @@ function initializeHamburgerMenu() {
             console.log('Menu opened');
         }
 
-        // Reset toggle lock after transition duration
         setTimeout(() => {
             isToggling = false;
             console.log('Toggle lock released');
@@ -65,7 +70,6 @@ function initializeHamburgerMenu() {
         mobileOverlay.classList.remove('active');
         body.style.overflow = '';
 
-        // Reset toggle lock
         setTimeout(() => {
             isToggling = false;
             console.log('Close lock released');
@@ -117,7 +121,6 @@ if (logo) {
     logo.style.pointerEvents = 'auto';
     logo.style.cursor = 'pointer';
     
-    // Force click handler to redirect to specific URL
     logo.addEventListener('click', function(e) {
         window.location.href = 'https://www.puregolddigitalagency.com/';
     });
@@ -125,22 +128,13 @@ if (logo) {
 
 class GlobalHeaderLoader {
     static getBasePath() {
-        // Get the current pathname
         const pathname = window.location.pathname;
-        
-        // Split path and filter out empty segments
         let pathSegments = pathname.split('/').filter(segment => segment.length > 0);
-        
-        // Remove HTML file if present (files like index.html, contact.html, etc.)
         const lastSegment = pathSegments[pathSegments.length - 1];
         if (lastSegment && lastSegment.includes('.html')) {
             pathSegments.pop();
         }
-        
-        // Calculate depth - if we're in root after removing HTML file, depth should be 0
         const depth = pathSegments.length;
-        
-        // Return appropriate path
         return depth > 0 ? '../'.repeat(depth) : './';
     }
 
@@ -150,6 +144,7 @@ class GlobalHeaderLoader {
         try {
             // Load CSS with dynamic path
             const cssResponse = await fetch(`${basePath}components/header/header.css`);
+            if (!cssResponse.ok) throw new Error(`CSS fetch failed: ${cssResponse.status}`);
             const css = await cssResponse.text();
             const style = document.createElement('style');
             style.textContent = css;
@@ -157,6 +152,7 @@ class GlobalHeaderLoader {
 
             // Load HTML with dynamic path
             const htmlResponse = await fetch(`${basePath}components/header/header.html`);
+            if (!htmlResponse.ok) throw new Error(`HTML fetch failed: ${htmlResponse.status}`);
             let html = await htmlResponse.text();
             
             // Fix navigation links in HTML
@@ -167,20 +163,19 @@ class GlobalHeaderLoader {
             setTimeout(() => {
                 const success = initializeHamburgerMenu();
                 if (!success) {
-                    // Retry after another delay if first attempt failed
+                    console.warn('Hamburger menu initialization failed, retrying...');
                     setTimeout(initializeHamburgerMenu, 100);
                 }
-            }, 10);
+            }, 50);
 
             console.log('✅ Global header loaded successfully from:', basePath);
         } catch (error) {
-            console.error('❌ Failed to load global header:', error);
+            console.error('❌ Failed to load global header:', error.message);
             this.loadFallback();
         }
     }
 
     static fixNavigationLinks(html, basePath) {
-        // Fix relative links in navigation
         const linkMappings = {
             'index.html': `${basePath}index.html`,
             'services.html': `${basePath}services.html`,
@@ -216,7 +211,6 @@ class GlobalHeaderLoader {
         document.body.insertAdjacentHTML('afterbegin', fallbackHeader);
         document.body.style.paddingTop = '80px'; 
         
-        // Try to initialize hamburger menu for fallback too
         setTimeout(initializeHamburgerMenu, 50);
     }
 }
@@ -225,4 +219,3 @@ class GlobalHeaderLoader {
 document.addEventListener('DOMContentLoaded', () => {
     GlobalHeaderLoader.load();
 });
-
