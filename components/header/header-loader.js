@@ -10,35 +10,54 @@ function initializeHamburgerMenu() {
         return false;
     }
 
-    // Debounce helper to prevent rapid double triggers
+    // Flag to prevent rapid toggling
     let isToggling = false;
+
+    // Toggle mobile menu
     function toggleMobileMenu(e) {
         e.preventDefault(); // Prevent default behavior
         e.stopPropagation(); // Stop event bubbling
-        if (isToggling) return; // Skip if already toggling
-        isToggling = true;
 
-        hamburger.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
-        mobileOverlay.classList.toggle('active');
-
-        // Prevent body scroll when menu is open
-        if (mobileMenu.classList.contains('active')) {
-            body.style.overflow = 'hidden';
-        } else {
-            body.style.overflow = '';
+        if (isToggling) {
+            console.log('Toggle skipped: Menu is already toggling');
+            return;
         }
 
-        // Reset toggle lock after a short delay
+        isToggling = true;
+        console.log('Toggling menu. Current state (active):', hamburger.classList.contains('active'));
+
+        // Toggle classes based on current state
+        const isActive = hamburger.classList.contains('active');
+        if (isActive) {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            body.style.overflow = '';
+            console.log('Menu closed');
+        } else {
+            hamburger.classList.add('active');
+            mobileMenu.classList.add('active');
+            mobileOverlay.classList.add('active');
+            body.style.overflow = 'hidden';
+            console.log('Menu opened');
+        }
+
+        // Reset toggle lock after transition duration
         setTimeout(() => {
             isToggling = false;
+            console.log('Toggle lock released');
         }, 300); // Matches CSS transition duration
     }
 
-    // Close mobile menu
+    // Close mobile menu explicitly
     function closeMobileMenu() {
-        if (isToggling) return; // Skip if already toggling
+        if (isToggling) {
+            console.log('Close skipped: Menu is already toggling');
+            return;
+        }
+
         isToggling = true;
+        console.log('Closing menu');
 
         hamburger.classList.remove('active');
         mobileMenu.classList.remove('active');
@@ -48,29 +67,42 @@ function initializeHamburgerMenu() {
         // Reset toggle lock
         setTimeout(() => {
             isToggling = false;
+            console.log('Close lock released');
         }, 300);
     }
 
     // Event listeners
-    hamburger.addEventListener('click', toggleMobileMenu, { passive: false });
-    mobileOverlay.addEventListener('click', closeMobileMenu);
+    hamburger.addEventListener('click', (e) => {
+        console.log('Hamburger clicked');
+        toggleMobileMenu(e);
+    }, { passive: false });
+
+    mobileOverlay.addEventListener('click', () => {
+        console.log('Overlay clicked');
+        closeMobileMenu();
+    });
 
     // Close menu when clicking on a link
     const mobileLinks = mobileMenu.querySelectorAll('a');
     mobileLinks.forEach(link => {
-        link.addEventListener('click', closeMobileMenu);
+        link.addEventListener('click', () => {
+            console.log('Mobile link clicked');
+            closeMobileMenu();
+        });
     });
 
     // Close menu on window resize if open
-    window.addEventListener('resize', function() {
+    window.addEventListener('resize', () => {
         if (window.innerWidth > 768 && mobileMenu.classList.contains('active')) {
+            console.log('Window resized, closing menu');
             closeMobileMenu();
         }
     });
 
     // Close menu on escape key
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+            console.log('Escape key pressed, closing menu');
             closeMobileMenu();
         }
     });
@@ -131,7 +163,6 @@ class GlobalHeaderLoader {
             document.body.insertAdjacentHTML('afterbegin', html);
 
             // Initialize hamburger menu after HTML is loaded
-            // Use a small delay to ensure DOM is fully updated
             setTimeout(() => {
                 const success = initializeHamburgerMenu();
                 if (!success) {
@@ -185,11 +216,4 @@ class GlobalHeaderLoader {
         document.body.style.paddingTop = '80px'; 
         
         // Try to initialize hamburger menu for fallback too
-        setTimeout(initializeHamburgerMenu, 50);
-    }
-}
-
-// Auto-load on DOM ready
-document.addEventListener('DOMContentLoaded', () => {
-    GlobalHeaderLoader.load();
-});
+        setTimeout(initializeHamburgerMenu
