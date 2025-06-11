@@ -1,3 +1,4 @@
+// Hamburger Menu Functionality
 function initializeHamburgerMenu() {
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -216,4 +217,12 @@ class GlobalHeaderLoader {
         document.body.style.paddingTop = '80px'; 
         
         // Try to initialize hamburger menu for fallback too
-        setTimeout(initializeHamburgerMenu
+        setTimeout(initializeHamburgerMenu, 50);
+    }
+}
+
+// Auto-load on DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+    GlobalHeaderLoader.load();
+});
+
