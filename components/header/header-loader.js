@@ -67,11 +67,9 @@ if (logo) {
     logo.style.pointerEvents = 'auto';
     logo.style.cursor = 'pointer';
     
-    // Force click handler if needed
+    // Force click handler to redirect to specific URL
     logo.addEventListener('click', function(e) {
-        if (this.href) {
-            window.location.href = this.href;
-        }
+        window.location.href = 'https://www.puregolddigitalagency.com/';
     });
 }
 
@@ -136,7 +134,7 @@ class GlobalHeaderLoader {
             'services.html': `${basePath}services.html`,
             'about.html': `${basePath}about.html`,
             'blog.html': `${basePath}blog.html`,
-            'contact.html': '${basePath}contact.html' // Hash links stay the same
+            'contact.html': `${basePath}contact.html`
         };
 
         let fixedHtml = html;
@@ -164,7 +162,7 @@ class GlobalHeaderLoader {
             </header>
         `;
         document.body.insertAdjacentHTML('afterbegin', fallbackHeader);
-        document.body.style.paddingTop = '80px'; // Account for fixed header
+        document.body.style.paddingTop = '80px'; 
         
         // Try to initialize hamburger menu for fallback too
         setTimeout(initializeHamburgerMenu, 50);
