@@ -1,4 +1,3 @@
-// Hamburger Menu Functionality
 function initializeHamburgerMenu() {
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -11,31 +10,49 @@ function initializeHamburgerMenu() {
         return false;
     }
 
-    // Toggle mobile menu
-    function toggleMobileMenu() {
+    // Debounce helper to prevent rapid double triggers
+    let isToggling = false;
+    function toggleMobileMenu(e) {
+        e.preventDefault(); // Prevent default behavior
+        e.stopPropagation(); // Stop event bubbling
+        if (isToggling) return; // Skip if already toggling
+        isToggling = true;
+
         hamburger.classList.toggle('active');
         mobileMenu.classList.toggle('active');
         mobileOverlay.classList.toggle('active');
-        
+
         // Prevent body scroll when menu is open
         if (mobileMenu.classList.contains('active')) {
             body.style.overflow = 'hidden';
         } else {
             body.style.overflow = '';
         }
+
+        // Reset toggle lock after a short delay
+        setTimeout(() => {
+            isToggling = false;
+        }, 300); // Matches CSS transition duration
     }
 
     // Close mobile menu
     function closeMobileMenu() {
+        if (isToggling) return; // Skip if already toggling
+        isToggling = true;
+
         hamburger.classList.remove('active');
         mobileMenu.classList.remove('active');
         mobileOverlay.classList.remove('active');
         body.style.overflow = '';
+
+        // Reset toggle lock
+        setTimeout(() => {
+            isToggling = false;
+        }, 300);
     }
 
     // Event listeners
-    hamburger.addEventListener('click', toggleMobileMenu);
-    hamburger.addEventListener('touchstart', toggleMobileMenu, { passive: true });
+    hamburger.addEventListener('click', toggleMobileMenu, { passive: false });
     mobileOverlay.addEventListener('click', closeMobileMenu);
 
     // Close menu when clicking on a link
@@ -75,24 +92,24 @@ if (logo) {
 
 class GlobalHeaderLoader {
     static getBasePath() {
-    // Get the current pathname
-    const pathname = window.location.pathname;
-    
-    // Split path and filter out empty segments
-    let pathSegments = pathname.split('/').filter(segment => segment.length > 0);
-    
-    // Remove HTML file if present (files like index.html, contact.html, etc.)
-    const lastSegment = pathSegments[pathSegments.length - 1];
-    if (lastSegment && lastSegment.includes('.html')) {
-        pathSegments.pop();
+        // Get the current pathname
+        const pathname = window.location.pathname;
+        
+        // Split path and filter out empty segments
+        let pathSegments = pathname.split('/').filter(segment => segment.length > 0);
+        
+        // Remove HTML file if present (files like index.html, contact.html, etc.)
+        const lastSegment = pathSegments[pathSegments.length - 1];
+        if (lastSegment && lastSegment.includes('.html')) {
+            pathSegments.pop();
+        }
+        
+        // Calculate depth - if we're in root after removing HTML file, depth should be 0
+        const depth = pathSegments.length;
+        
+        // Return appropriate path
+        return depth > 0 ? '../'.repeat(depth) : './';
     }
-    
-    // Calculate depth - if we're in root after removing HTML file, depth should be 0
-    const depth = pathSegments.length;
-    
-    // Return appropriate path
-    return depth > 0 ? '../'.repeat(depth) : './';
-}
 
     static async load() {
         const basePath = this.getBasePath();
