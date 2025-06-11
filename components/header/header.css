@@ -26,6 +26,19 @@
     border-radius: 2px;
 }
 
+/* Middle line */
+.hamburger .middle-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 25px;
+    height: 3px;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    transform: translate(-50%, -50%); /* Center the line */
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
 /* Bottom line */
 .hamburger::after {
     content: '';
@@ -38,7 +51,6 @@
     transform: translateX(-50%);
     transition: all 0.3s ease;
     border-radius: 2px;
-    box-shadow: 0 -16px 0 0 #FFD700; /* Creates the middle line */
 }
 
 /* Hamburger animation when active - forms X */
@@ -47,11 +59,15 @@
     transform: translate(-50%, -50%) rotate(45deg); /* Diagonal line 1 */
 }
 
+.hamburger.active .middle-line {
+    opacity: 0; /* Hide middle line when active */
+}
+
 .hamburger.active::after {
     top: 50%;
     transform: translate(-50%, -50%) rotate(-45deg); /* Diagonal line 2 */
-    box-shadow: none; /* Hide the middle line */
 }
+
 /* Mobile menu overlay */
 .nav-links.mobile-menu {
     position: fixed;
