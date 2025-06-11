@@ -43,7 +43,7 @@
 .hamburger::after {
     content: '';
     position: absolute;
-    top: calc(50% + 8px); /* Position below the middle */
+    top: calc(50% + 6px); /* Position below the middle */
     left: 50%;
     width: 25px;
     height: 3px;
