@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Pure Gold Digital Agency</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/contact.css">
+</head>
+<body>
+
+    <!-- Contact Hero Section -->
+    <section class="contact-hero">
+        <div class="container">
+            <h1>Let's Create Something <span class="highlight">Golden</span> Together</h1>
+            <p>Ready to transform your digital presence? We're here to help you achieve extraordinary results. Get in touch with our expert team today.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get In Touch</h2>
+                <p>Ready to transform your brand? Get in touch with our team and let's discuss how we can elevate your digital presence.</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-form">
+                    <div class="success-message" id="successMessage">
+                        Thank you for your message! We'll get back to you within 24 hours.
+                    </div>
+                    <form id="contactForm" action="https://formspree.io/f/mwpbkzzl" method="POST">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="company">Company Name</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="budget">Project Budget</label>
+                            <select id="budget" name="budget" style="width: 100%; padding: 0.75rem; border: 2px solid #e9ecef; border-radius: 10px; font-size: 1rem; font-family: 'Montserrat', sans-serif;">
+                                <option value="">Select Budget Range</option>
+                                <option value="Under $5,000">Under $5,000</option>
+                                <option value="$5,000 - $10,000">$5,000 - $10,000</option>
+                                <option value="$10,000 - $25,000">$10,000 - $25,000</option>
+                                <option value="$25,000+">$25,000+</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Project Details *</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Tell us about your project, goals, and timeline..." required></textarea>
+                        </div>
+                        
+                        <input type="hidden" name="_next" value="https://puregolddigital.github.io/www.puregolddigitalagency.com/Thank-You.html" />
+                        <input type="hidden" name="_subject" value="New Contact Form Submission" />                        
+                        <button type="submit" class="cta-button" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+                
+                <div class="contact-info">
+                    <h3>Let's Connect</h3>
+                    <p>We're here to help you create extraordinary digital experiences. Reach out through any of the channels below or fill out our contact form.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div>
+                                <strong>Email</strong>
+                                contact@puregolddigitalagency.com
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📱</div>
+                            <div>
+                                <strong>Phone</strong>
+                                +1 (985) 791-2333
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <strong>Location</strong>
+                                St. Gabriel, LA 70776
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">⏰</div>
+                            <div>
+                                <strong>Business Hours</strong>
+                                Mon-Fri: 9AM-6PM EST
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Info Section -->
+    <section class="additional-info">
+        <div class="container">
+            <h2>Why Choose Pure Gold Digital?</h2>
+            <p>We're not just another digital agency. We're your partners in creating digital experiences that drive real results and lasting success.</p>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <span class="feature-icon">⚡</span>
+                    <h3>Fast Response</h3>
+                    <p>We respond to all inquiries within 2 hours during business hours</p>
+                </div>
+                
+                <div class="feature-item">
+                    <span class="feature-icon">🎯</span>
+                    <h3>Custom Solutions</h3>
+                    <p>Every project is tailored to your specific needs and goals</p>
+                </div>
+                
+                <div class="feature-item">
+                    <span class="feature-icon">🏆</span>
+                    <h3>Proven Results</h3>
+                    <p>Track record of delivering successful projects on time and on budget</p>
+                </div>
+                
+                <div class="feature-item">
+                    <span class="feature-icon">🤝</span>
+                    <h3>Ongoing Support</h3>
+                    <p>We provide continued support even after project completion</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Pure Gold Digital Agency. All rights reserved. | Crafting digital experiences that shine.</p>
+        </div>
+    </footer>
+  <script src="components/header/header.js"></script>
+    <script src="components/header/header-loader.js"></script>
+    <script src="scripts/index.js"></script>
+</body>
+</html>
