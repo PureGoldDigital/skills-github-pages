@@ -1,5 +1,51 @@
 /* Hamburger Menu Styles */
-display
+.hamburger {
+    display: none;
+    width: 25px;
+    height: 3px;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    cursor: pointer;
+    padding: 0.75rem;
+    margin-left: 0.5rem;
+    position: relative;
+    z-index: 1001;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 3px;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    left: 0.75rem; /* Align with padding */
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.hamburger::before {
+    top: 0.25rem; /* Position above the middle line */
+}
+
+.hamburger::after {
+    bottom: 0.25rem; /* Position below the middle line */
+}
+
+/* Hamburger animation when active */
+.hamburger.active {
+    background: transparent; /* Hide the middle line */
+}
+
+.hamburger.active::before {
+    transform: rotate(-45deg) translate(-7px, 7px);
+}
+
+.hamburger.active::after {
+    transform: rotate(45deg) translate(-7px, -7px);
+}
+
 
 /* Mobile menu overlay */
 .nav-links.mobile-menu {
