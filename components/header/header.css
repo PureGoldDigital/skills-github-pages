@@ -16,6 +16,7 @@
 .hamburger::before {
     content: '';
     position: absolute;
+    top: calc(50% - 8px); 
     left: 50%;
     width: 25px;
     height: 3px;
