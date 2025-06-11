@@ -2,48 +2,52 @@
 .hamburger {
     display: none;
     width: 25px;
-    height: 3px;
-    background: linear-gradient(135deg, #FFD700, #FFA500);
+    height: 25px; /* Changed to square container */
     cursor: pointer;
     padding: 0.75rem;
     margin-left: 0.5rem;
     position: relative;
     z-index: 1001;
     transition: all 0.3s ease;
-    border-radius: 2px;
+    background: transparent; /* Remove background from container */
 }
 
-.hamburger::before,
-.hamburger::after {
+/* Middle line */
+.hamburger::before {
     content: '';
     position: absolute;
+    top: 50%;
+    left: 50%;
     width: 25px;
     height: 3px;
     background: linear-gradient(135deg, #FFD700, #FFA500);
-    left: 0.75rem;
+    transform: translate(-50%, -50%); /* Center the line */
     transition: all 0.3s ease;
     border-radius: 2px;
 }
 
-.hamburger::before {
-    top: 0.4rem; /* Space above middle line */
-}
-
+/* Top and bottom lines */
 .hamburger::after {
-    bottom: 0.4rem; /* Space below middle line */
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 25px;
+    height: 3px;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    transition: all 0.3s ease;
+    border-radius: 2px;
+    transform: translateX(-50%);
+    box-shadow: 0 -8px 0 0 #FFD700, 0 8px 0 0 #FFD700; /* Creates top and bottom lines */
 }
 
-/* Hamburger animation when active */
-.hamburger.active {
-    background: transparent; /* Hide middle line to form X */
-}
-
+/* Hamburger animation when active - forms X */
 .hamburger.active::before {
-    transform: rotate(45deg) translate(3px, 3px); /* Top-right of X */
+    transform: translate(-50%, -50%) rotate(45deg); /* Diagonal line 1 */
 }
 
 .hamburger.active::after {
-    transform: rotate(-45deg) translate(3px, -3px); /* Bottom-left of X */
+    transform: translateX(-50%) rotate(-45deg); /* Diagonal line 2 */
+    box-shadow: none; /* Hide the extra lines */
 }
 
 /* Mobile menu overlay */
